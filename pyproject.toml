@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "chronicle"
+version = "0.1.0"
+description = ""
+authors = ["Sai"]
+readme = "README.md"
+package-mode = false
+packages = [{include = "chronicle_src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.0"
+langchain = "^0.2.5"
+stumpy = "^1.12.0"
+jinja2 = "^3.1.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

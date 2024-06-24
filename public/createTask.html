@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Chronicle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body style="background: #f6f8f9;font-size: 14px;">
+    <nav class="navbar navbar-expand-md py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#" style="padding: 0px 5px;background: linear-gradient(180deg, #eaebee 0%, #d6d8da), #eaeaea;border-radius: 8px;"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-1 bs-icon" style="font-size: 15px;width: 25px;height: 25px;background: linear-gradient(#0089fa, #3d69ab);"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.24 7.76C15.07 6.59 13.54 6 12 6v6l-4.24 4.24c2.34 2.34 6.14 2.34 8.49 0 2.34-2.34 2.34-6.14-.01-8.48zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+                    </svg></span><span style="font-weight: bold;font-size: 24px;color: #172837;">Chronicle</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto"></ul><a href="tasks" class="btn btn-primary btn-sm chronicle_primary_btn" type="button" style="text-align: center;vertical-align: middle;line-height: 5px;" >View Tasks<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 23px;margin-left: 4px;line-height: 5px;">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path>
+                    </svg></a>
+            </div>
+        </div>
+    </nav>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-11 col-lg-10 col-xl-9 col-xxl-8">
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-new-section float-start" style="display: inline;font-size: 20px;text-align: left;margin-right: 5px;">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M9 12l6 0"></path>
+                                <path d="M12 9l0 6"></path>
+                                <path d="M4 6v-1a1 1 0 0 1 1 -1h1m5 0h2m5 0h1a1 1 0 0 1 1 1v1m0 5v2m0 5v1a1 1 0 0 1 -1 1h-1m-5 0h-2m-5 0h-1a1 1 0 0 1 -1 -1v-1m0 -5v-2m0 -5"></path>
+                            </svg>
+                            <h5 style="font-size: 18px;font-weight: bold;display: inline;">Create New Task</h5>
+                        </div>
+                    </div>
+                    <div class="card mb-5" style="border-style: none;">
+                        <div class="card-body p-sm-5" style="box-shadow: 0px 0px 40px 0px #0000000d;border-radius: 12px;border: 1px solid rgb(228,228,228) ;">
+                            <form class="text-start" method="post">
+                                <div class="row" style="align-items: center;">
+                                    <div class="col-lg-3"><label class="col-form-label">Upload data file</label></div>
+                                    <div class="col"><input class="form-control form-control-sm chronicle_input" type="file" name="data_file"></div>
+                                    <div class="col-lg-2"><button class="btn btn-primary btn-sm chronicle_primary_btn" type="button" style="/*border-radius: 5px;*/">Upload</button></div>
+                                </div>
+                                <p class="text-center" style="margin: 16px;font-weight: bold;font-size: 12px;">(OR)</p>
+                                <div class="row" style="align-items: center;">
+                                    <div class="col-lg-3"><label class="col-form-label">Database table</label></div>
+                                    <div class="col">
+                                        <fieldset><input class="form-control form-control-sm" type="text" name="connection_str" placeholder="Database Connection String" style="margin-bottom: 5px;"><input class="form-control form-control-sm" type="text" name="table_str" placeholder="Table Name"></fieldset>
+                                    </div>
+                                    <div class="col-lg-2"><button class="btn btn-primary btn-sm chronicle_primary_btn" type="button" style="/*border-radius: 5px;*/">Connect</button></div>
+                                </div>
+                                <div style="margin-top: 35px;margin-bottom: 35px;border-bottom: 1px solid #e8e8e8c0;"></div>
+                                <div class="row" style="align-items: center;margin-bottom: 30px;">
+                                    <div class="col-lg-3"><label class="col-form-label">Choose Columns</label></div>
+                                    <div class="col">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><label class="col-form-label" style="font-size: 12px;font-weight: 400;" for="date_time_column">Date Time Column&nbsp;</label></div>
+                                            <div class="col"><select class="form-select form-select-sm" name="data_time_column" style="font-size: 12px;">
+                                                    <option value="13">Col1</option>
+                                                    <option value="14">Col2</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><label class="col-form-label" style="font-size: 12px;font-weight: 400;" for="data_column">Data Column</label></div>
+                                            <div class="col"><select class="form-select form-select-sm" name="data_column" style="font-size: 12px;">
+                                                    <option value="13">Col1</option>
+                                                    <option value="14">Col2</option>
+                                                </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="align-items: center;margin-bottom: 30px;">
+                                    <div class="col-lg-3"><label class="col-form-label">Data Descriptions</label></div>
+                                    <div class="col"><textarea class="form-control" placeholder="Describe time series data" style="margin-bottom: 5px;"></textarea>
+                                        <div class="row align-items-center" style="margin-bottom: 5px;">
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><select class="form-select form-select-sm" name="col1" style="font-size: 12px;">
+                                                    <option value="13">Col1</option>
+                                                    <option value="14">Col2</option>
+                                                </select></div>
+                                            <div class="col"><input class="form-control form-control-sm" type="text" name="col1_desc" placeholder="Column Description"></div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><select class="form-select form-select-sm" name="col1" style="font-size: 12px;">
+                                                    <option value="13">Col1</option>
+                                                    <option value="14">Col2</option>
+                                                </select></div>
+                                            <div class="col"><input class="form-control form-control-sm" type="text" name="col1_desc" placeholder="Column Description"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="align-items: center;margin-bottom: 30px;">
+                                    <div class="col-lg-3"><label class="col-form-label">Model Parameters</label></div>
+                                    <div class="col">
+                                        <div class="row align-items-center" style="margin-bottom: 5px;">
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><input class="form-control form-control-sm" type="text" name="window_size" placeholder="Window Size" style="color: rgb(33, 37, 41);"></div>
+                                            <div class="col">
+                                                <p class="text-start d-inline" style="font-size: 10px;line-height: 1px;color: rgb(106,106,106);">(Window size depends on domain and length of data points in input data set. If unsure of value, you can leave it blank and model will try to guess the best window size. Note : Leaving it blank will be very performance intensive operation on larger datasets)</p>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-4 d-lg-flex">
+                                                <div class="form-check d-inline-flex" style="vertical-align: middle;"><input class="form-check-input" type="checkbox" id="formCheck-1" name="continous_data_flag"><label class="form-check-label" for="continous_data_flag" style="font-size: 12px;margin-left: 5px;color: rgb(33, 37, 41);">Continuous Data</label></div>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-start d-inline" style="font-size: 10px;line-height: 1px;color: rgb(106,106,106);">(Choose this option if you want to compute for live data. This can only be chosen if database connections are set)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><input class="btn btn-primary chronicle_primary_btn" type="submit" name="submit" value="Submit Task">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
