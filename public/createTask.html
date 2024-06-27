@@ -39,10 +39,10 @@
                     </div>
                     <div class="card mb-5" style="border-style: none;">
                         <div class="card-body p-sm-5" style="box-shadow: 0px 0px 40px 0px #0000000d;border-radius: 12px;border: 1px solid rgb(228,228,228) ;">
-                            <form class="text-start" method="post">
+                            <form id="create_task_form" class="text-start" method="post" action="/api/v1/task">
                                 <div class="row" style="align-items: center;">
                                     <div class="col-lg-3"><label class="col-form-label">Upload data file</label></div>
-                                    <div class="col"><input id="upload_file" class="form-control form-control-sm chronicle_input" type="file" name="data_file"></div>
+                                    <div class="col"><input id="upload_file" class="form-control form-control-sm chronicle_input" type="file" name="file"></div>
                                     <div class="col-lg-2 text-center"><button id="upload_btn" class="btn btn-primary btn-sm chronicle_primary_btn" type="button" style="/*border-radius: 5px;*/">Upload</button></div>
                                 </div>
                                 <p class="text-center" style="margin: 16px;font-weight: bold;font-size: 12px;">(OR)</p>
@@ -58,37 +58,25 @@
                                     <div class="col-lg-3"><label class="col-form-label">Choose Columns</label></div>
                                     <div class="col">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-4 d-lg-flex align-items-center"><label class="col-form-label" style="font-size: 12px;font-weight: 400;" for="date_time_column">Date Time Column&nbsp;</label></div>
-                                            <div class="col"><select class="form-select form-select-sm" name="data_time_column" style="font-size: 12px;">
-                                                    <option value="13">Col1</option>
-                                                    <option value="14">Col2</option>
+                                            <div class="col-lg-4 d-lg-flex align-items-center"><label class="col-form-label" style="font-size: 12px;font-weight: 400;" for="date_time_column">Date Time Column</label></div>
+                                            <div class="col"><select class="form-select form-select-sm" name="date_time_column" style="font-size: 12px;">
                                                 </select></div>
                                         </div>
                                         <div class="row align-items-center">
                                             <div class="col-lg-4 d-lg-flex align-items-center"><label class="col-form-label" style="font-size: 12px;font-weight: 400;" for="data_column">Data Column</label></div>
                                             <div class="col"><select class="form-select form-select-sm" name="data_column" style="font-size: 12px;">
-                                                    <option value="13">Col1</option>
-                                                    <option value="14">Col2</option>
                                                 </select></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="align-items: center;margin-bottom: 30px;">
                                     <div class="col-lg-3"><label class="col-form-label">Data Descriptions</label></div>
-                                    <div class="col"><textarea class="form-control" placeholder="Describe time series data" style="margin-bottom: 5px;"></textarea>
+                                    <div class="col"><textarea name="data_description" class="form-control" placeholder="Describe time series data" style="margin-bottom: 5px;"></textarea>
                                         <div class="row align-items-center" style="margin-bottom: 5px;">
-                                            <div class="col-lg-4 d-lg-flex align-items-center"><select class="form-select form-select-sm" name="col1" style="font-size: 12px;">
-                                                    <option value="13">Col1</option>
-                                                    <option value="14">Col2</option>
-                                                </select></div>
-                                            <div class="col"><input class="form-control form-control-sm" type="text" name="col1_desc" placeholder="Column Description"></div>
+                                            <div class="col"><input class="form-control form-control-sm" type="text" name="date_time_column_desc" placeholder="Date-Time column description"></div>
                                         </div>
                                         <div class="row align-items-center">
-                                            <div class="col-lg-4 d-lg-flex align-items-center"><select class="form-select form-select-sm" name="col1" style="font-size: 12px;">
-                                                    <option value="13">Col1</option>
-                                                    <option value="14">Col2</option>
-                                                </select></div>
-                                            <div class="col"><input class="form-control form-control-sm" type="text" name="col1_desc" placeholder="Column Description"></div>
+                                            <div class="col"><input class="form-control form-control-sm" type="text" name="data_column_desc" placeholder="Data column description"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +91,7 @@
                                         </div>
                                         <div class="row align-items-center">
                                             <div class="col-lg-4 d-lg-flex">
-                                                <div class="form-check d-inline-flex" style="vertical-align: middle;"><input class="form-check-input" type="checkbox" id="formCheck-1" name="continous_data_flag"><label class="form-check-label" for="continous_data_flag" style="font-size: 12px;margin-left: 5px;color: rgb(33, 37, 41);">Continuous Data</label></div>
+                                                <div class="form-check d-inline-flex" style="vertical-align: middle;"><input class="form-check-input" type="checkbox" id="formCheck-1" name="continuous_data_flag"><label class="form-check-label" for="continuous_data_flag" style="font-size: 12px;margin-left: 5px;color: rgb(33, 37, 41);">Continuous Data</label></div>
                                             </div>
                                             <div class="col">
                                                 <p class="text-start d-inline" style="font-size: 10px;line-height: 1px;color: rgb(106,106,106);">(Choose this option if you want to compute for live data. This can only be chosen if database connections are set)</p>
@@ -128,24 +116,53 @@
             let fd = new FormData();
             let file = $('#upload_file')[0].files[0];
             fd.append('file', file);
-
             $.ajax({
                 url: '/api/v1/fetchColumns',
                 type: 'post',
                 data: fd,
                 contentType: false,
                 processData: false,
-                success: function(response){
-                    if(response != 0){
-                        alert('file uploaded' +response);
-                    }
-                    else{
+                success: function (response) {
+                    if (response) {
+                        let date_time_column = $('select[name="date_time_column"]');
+                        let data_column = $('select[name="data_column"]');
+                        date_time_column.empty();
+                        response.forEach(function (item, index) {
+                            date_time_column.append($('<option>', {
+                                value: item,
+                                text: item
+                            }));
+                            data_column.append($('<option>', {
+                                value: item,
+                                text: item
+                            }));
+                        });
+                    } else {
                         alert('file not uploaded');
                     }
                 },
             });
+        });
 
-
+        let $createTaskForm = $("#create_task_form");
+        $createTaskForm.on("submit", function (event) {
+            event.preventDefault();
+            let form = $createTaskForm[0]; // You need to use standard javascript object here
+            let formData = new FormData(form);
+            $.ajax({
+                url: '/api/v1/task',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response) {
+                        console.log(response);
+                    } else {
+                        alert('file not uploaded');
+                    }
+                },
+            });
         });
     });
 </script>
